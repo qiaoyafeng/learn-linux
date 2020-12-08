@@ -1,5 +1,150 @@
 # Shell test 命令
+Shell中的 test 命令用于检查某个条件是否成立，它可以进行数值、字符和文件三个方面的测试。
+
+## 数值测试
+
+| 参数 | 说明           |
+| ---- | -------------- |
+| -eq  | 等于则为真     |
+| -ne  | 不等于则为真   |
+| -gt  | 大于则为真     |
+| -ge  | 大于等于则为真 |
+| -lt  | 小于则为真     |
+| -le  | 小于等于则为真 |
 
 
+实例
+```shell
+#!/bin/bash
+# author： qiaoyafeng
 
-[Shell 流程控制]()
+echo "Hello World !"
+
+num1=100
+num2=100
+
+if test $[num1] -eq $[num2]
+then
+    echo "两个数相等"
+else
+    echo "两个数不相等"
+fi
+```
+
+输出结果：
+```text
+$ ./test.sh
+Hello World !
+两个数相等
+
+```
+代码中的 [] 执行基本的算数运算，如：
+
+```shell
+
+a=5
+b=6
+
+result=$[a+b]  # 注意等号两边不能有空格
+echo "result: $result"
+```
+输出结果：
+```text
+result: 11
+```
+
+
+## 字符串测试
+
+| 参数      | 说明                     |
+| --------- | ------------------------ |
+| =         | 等于则为真               |
+| !=        | 不相等则为真             |
+| -z 字符串 | 字符串的长度为零则为真   |
+| -n 字符串 | 字符串的长度不为零则为真 |
+
+
+实例
+```shell
+num1="google"
+num2="baidu"
+if test $num1 = $num2
+then
+    echo '两个字符串相等!'
+else
+    echo '两个字符串不相等!'
+fi
+
+```
+
+输出结果：
+```text
+两个字符串不相等!
+```
+
+## 文件测试
+
+| 参数      | 说明                                 |
+| --------- | ------------------------------------ |
+| -e 文件名 | 如果文件存在则为真                   |
+| -r 文件名 | 如果文件存在且可读则为真             |
+| -w 文件名 | 如果文件存在且可写则为真             |
+| -x 文件名 | 如果文件存在且可执行则为真           |
+| -s 文件名 | 如果文件存在且至少有一个字符则为真   |
+| -d 文件名 | 如果文件存在且为目录则为真           |
+| -f 文件名 | 如果文件存在且为普通文件则为真       |
+| -c 文件名 | 如果文件存在且为字符型特殊文件则为真 |
+| -b 文件名 | 如果文件存在且为块特殊文件则为真     |
+
+另外，Shell 还提供了与( -a )、或( -o )、非( ! )三个逻辑操作符用于将测试条件连接起来，其优先级为： ! 最高， -a 次之， -o 最低。例如：
+
+
+```shell
+cd /bin
+if test -e ./bash
+then
+    echo "bash文件已存在!"
+else
+    echo "bash文件不存在!"
+fi
+
+
+cd /bin
+if test -e ./qiaofile
+then
+    echo "qiaofile文件已存在!"
+else
+    echo "qiaofile文件不存在!"
+fi
+
+
+cd /bin
+if test -e ./qiaofile  -o -e ./bash
+then
+    echo "qiaofile和bash至少有一个文件存在!"
+else
+    echo "qiaofile和bash两个文件都不存在!"
+fi
+
+
+cd /bin
+if test -e ./qiaofile  -o -e ./yafengfile
+then
+    echo "qiaofile和yafengfile至少有一个文件存在!"
+else
+    echo "qiaofile和yafengfile两个文件都不存在!"
+fi
+
+```
+
+输出结果：
+```text
+bash文件已存在!
+qiaofile文件不存在!
+qiaofile和bash至少有一个文件存在!
+qiaofile和yafengfile两个文件都不存在!
+
+```
+
+
+[Shell 流程控制](process-control.md)
