@@ -6,4 +6,4 @@
 
 - [文档](docs/README.md)
 
-- [示例](sample/README.md)
+- [示例](samples/README.md)
