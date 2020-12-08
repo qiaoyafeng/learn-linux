@@ -1,2 +1,9 @@
-# learn-linux
-learn linux
+# Learn Linux 
+
+本工程主要是用来学习Linux 
+
+## 目录结构
+
+- [文档](docs/README.md)
+
+- [示例](sample/README.md)
